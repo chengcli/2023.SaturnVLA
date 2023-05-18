@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 from pylab import *
 from netCDF4 import Dataset
-from build.contribution_function import plot_contribution_function
+from contribution_function import plot_contribution_function
 from radio.saturn_radio_data import plot_saturn_radio_data
 from profiles import plot_vapor_profile, plot_temp_profile
 
@@ -24,11 +24,11 @@ ax = axs[2]
 #plot_vapor_profile(ax, ncdata, 'vapor1', 'C6')
 plot_vapor_profile(ax, ncdata2, 'vapor1', 'C6')
 plot_vapor_profile(ax, ncdata, 'vapor2', 'C7')
-ax.legend(['H$_2$O', 'NH$_3$'], fontsize = 12)
+ax.legend(['H$_2$O', 'NH$_3$'], fontsize = 14)
 ax.set_ylim([50., 0.5])
 ax.set_xlim([1.E-8, 2.E2])
-ax.set_xlabel('Vapor mixing ratio (g/kg)', fontsize = 12)
-ax.set_ylabel('Pressure (bar)', fontsize = 12)
+ax.set_xlabel('Vapor mixing ratio (g/kg)', fontsize = 14)
+ax.set_ylabel('Pressure (bar)', fontsize = 14)
 
 #show()
 savefig('figs/data_contribution_atm_v2.png', bbox_inches = 'tight')
