@@ -1,0 +1,89 @@
+0.0040  97.5   10
+0.0056  100.5  10
+0.0065  103.7  10
+0.0099  97.3   10
+0.0103  99.3   10
+0.0111  102.9  10
+0.0136  98.8   10
+0.0149  99.9   10
+0.0169  97.2   11
+0.0205  97.2   10
+0.0222  94.1   10
+0.0332  108.4  11
+0.0353  112.9  12
+0.0414  119.2  12
+0.0450  112.3  12
+0.0517  122.2  12
+0.0664  137    14
+0.0968  134.5  14
+ .1     133.4  13  !NASA publ. Saturn System; p. 197
+ .12    132.0  21  !NASA publ. Saturn System; p. 197
+ .13    140.0  14
+ .14    165.2  18  !NASA publ. Saturn System; p. 197
+ .14    115.3  29  !NASA publ. Saturn System; p. 197
+ .14    161.1  11  !NASA publ. Saturn System; p. 197
+ .14    168.0  13  !NASA publ. Saturn System; p. 197
+ .21    137.4  10  !NASA publ. Saturn System; p. 197; error 10
+ .27    156.0  16 ! Dowling; error 5
+ .27    137.3  14 !Grossman, thesis 1990; error 4.5
+ .31    141.7  11  !NASA publ. Saturn System; p. 197
+ .33    153.2  6  !NASA publ. Saturn System; p. 197; error 6
+ .33    156.0  3  !NASA publ. Saturn System; p. 197; error 3
+ .34    149.5  2  !NASA publ. Saturn System; p. 197; error 2
+ .35    165.1  16  !NASA publ. Saturn System; p. 197
+ .35    138.6  3  !NASA publ. Saturn System; p. 197; error 3
+ .39    133.2  17  !NASA publ. Saturn System; p. 197
+ .43    134.7  7  !NASA publ. Saturn System; p. 197
+ .6     145.4  7  !NASA publ. Saturn System; p. 197
+ .70    165.7  4  !NASA publ. Saturn System; p. 197
+ .82    138.2  9  !NASA publ. Saturn System; p. 197
+ .83    144.0  9  !NASA publ. Saturn System; p. 197
+ .85    154.5  7  !NASA publ. Saturn System; p. 197
+ .95    141.8  15  !NASA publ. Saturn System; p. 197
+ .96    129.3  7  !NASA publ. Saturn System; p. 197
+ .96    138.6  6  !NASA publ. Saturn System; p. 197
+ .96    139.0  7  !NASA publ. Saturn System; p. 197
+ 1.2    136.1  6  !NASA publ. Saturn System; p. 197
+ 1.3    132.0  6  !NASA publ. Saturn System; p. 197
+ 1.3    125.0  8  !NASA publ. Saturn System; p. 197
+ 1.33   132.5  7  ! Briggs and Sackett, error 1.3
+ 1.46   140.4  6  !NASA publ. Saturn System; p. 197
+ 1.53   145.4  15  !NASA publ. Saturn System; p. 197
+ 1.95   141.1  4  !NASA publ. Saturn System; p. 197
+ 1.99   136.1  5  ! Briggs and Sackett  error 3.2
+ 2.0    140.1  7
+ 2.1    161.2  7  !NASA publ. Saturn System; p. 197
+ 3.1    150.3  13  !NASA publ. Saturn System; p. 197
+ 3.53   161.4  9
+ 3.6    167.7  6  !NASA publ. Saturn System; p. 197
+ 3.6    170.3  7  !NASA publ. Saturn System; p. 197
+ 3.7    163.0  7  !NASA publ. Saturn System; p. 197
+ 3.7    169.0  5  !NASA publ. Saturn System; p. 197
+ 3.7    183.7  12  !NASA publ. Saturn System; p. 197
+ 6.0    198.8  20  !NASA publ. Saturn System; p. 197
+ 6.0    190.0  45  !NASA publ. Saturn System; p. 197
+ 6.14   176.4  9
+ 6.14   173.6  5   ! Briggs and Sackett error 0.8
+ 6.2    171.6  18  !NASA publ. Saturn System; p. 197
+ 9.0    175.0  25  !NASA publ. Saturn System; p. 197
+10.0    207.7  45  !NASA publ. Saturn System; p. 197
+10.7    182.0  21  !NASA publ. Saturn System; p. 197
+11.1    197.2  26  !NASA publ. Saturn System; p. 197
+11.3    200.5  20  !NASA publ. Saturn System; p. 197
+11.3    211.6  21  !NASA publ. Saturn System; p. 197
+20.1    230.9  12
+20.7    219.0  7.5  ! Briggs and Sackett error 3.5
+21.1    208.0  13  !NASA publ. Saturn System; p. 197
+21.1    222.0  9  !NASA publ. Saturn System; p. 197
+21.1    222.0  15  !NASA publ. Saturn System; p. 197
+21.2    292.0  37  !NASA publ. Saturn System; p. 197
+21.2    200.8  25  !NASA publ. Saturn System; p. 197
+21.2    206.2  25  !NASA publ. Saturn System; p. 197
+21.4    218.1  15  !NASA publ. Saturn System; p. 197
+49.5    432.2  70  !NASA publ. Saturn System; p. 197
+69.7    382.8  50  !NASA publ. Saturn System; p. 197
+70.0    352    42  ! Briggs and Sackett
+94.3    549.6  110  !NASA publ. Saturn System; p. 197
+
+
+
