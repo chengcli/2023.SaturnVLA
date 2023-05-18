@@ -8,3 +8,14 @@
 ```
 ./plot_saturn_latitude_v2.py
 ```
+
+- Figure 4:
+```
+./write_workflow.py -i vla_processing.yml
+./vla_processing.sh
+```
+
+- Figure S7:
+```
+./plot_fit_quality.py
+```
