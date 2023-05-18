@@ -1,0 +1,36 @@
+# EPHEMERIDES
+FITS_FILE         = ./Saturn_2015/fits_smeared/150125/sat-q-witb.fits
+PLANET            = saturn
+NAIF_ID_CODE      = 699
+FACILITY          = vla
+FACILITY_CODE     = -5
+TIME_START        = 2015-01-24,16:23
+TIME_END          = 2015-01-24,17:23
+RA                = 16,04,29.15
+DEC               = -18,46,46.6
+DRA               = 11.05016
+DDEC              = -1.84216
+OBLON (W)         = 75.536335
+OBLAT (GRAPHIC)   = 24.607975
+NPANG (DEG)       = 2.4139
+DIST (KM)         = 1554677062.3711157
+DEL1 (DEG)        = -2.07715066684e-05
+DEL2 (DEG)        = 2.07715066684e-05
+PIXSCALE1 (KM)    = 563.6189129930017
+PIXSCALE2 (KM)    = 563.6189129930017
+# PLANET DETECTION
+PIXELS (PX)       = 900x900
+CENTER (PX)       = 449.99,449.96
+RE (PX)           = 106.49
+RP (PX)           = 98.05
+INC (DEG)         = 1.31
+FITTING           = 20.00
+# TB 
+TB_MAX              = 13.05
+TB_MIN              = -17.40
+ANGLE_MAX           = 0.18
+ANGLE_MIN           = 89.48
+LAT_MAX (GRAPHIC)   = 89.60
+LAT_MIN (GRAPHIC)   = -63.47
+LON_MAX (W)         = 359.99
+LON_MIN (W)         = 0.00

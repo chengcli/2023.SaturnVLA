@@ -1,0 +1,36 @@
+# EPHEMERIDES
+FITS_FILE         = ./Saturn_2015/fits_smeared/150528/sat-u-ictb.fits
+PLANET            = saturn
+NAIF_ID_CODE      = 699
+FACILITY          = vla
+FACILITY_CODE     = -5
+TIME_START        = 2015-05-29,05:43
+TIME_END          = 2015-05-29,06:43
+RA                = 15,57,09.34
+DEC               = -18,12,59.9
+DRA               = -11.0896
+DDEC              = 2.024942
+OBLON (W)         = 273.005487
+OBLAT (GRAPHIC)   = 23.054331
+NPANG (DEG)       = 2.1921
+DIST (KM)         = 1342249696.6015851
+DEL1 (DEG)        = -1.59356158658e-05
+DEL2 (DEG)        = 1.59356158658e-05
+PIXSCALE1 (KM)    = 373.3185191440773
+PIXSCALE2 (KM)    = 373.3185191440773
+# PLANET DETECTION
+PIXELS (PX)       = 800x800
+CENTER (PX)       = 400.50,396.00
+RE (PX)           = 162.55
+RP (PX)           = 153.05
+INC (DEG)         = 0.00
+FITTING           = 21.19
+# TB 
+TB_MAX              = 13.02
+TB_MIN              = -13.90
+ANGLE_MAX           = 0.17
+ANGLE_MIN           = 89.58
+LAT_MAX (GRAPHIC)   = 89.84
+LAT_MIN (GRAPHIC)   = -65.64
+LON_MAX (W)         = 359.98
+LON_MIN (W)         = 0.00
