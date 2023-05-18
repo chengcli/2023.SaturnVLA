@@ -1,0 +1,268 @@
+name : Saturn VLA image processing workflow
+jobs:
+  sat-sckq-witb:
+    skip: true
+    needs:
+      files:
+        - Saturn_2015/fits_smeared/150528/sat-s-witb.fits
+        - Saturn_2015/fits_smeared/150528/sat-c-witb.fits
+        - Saturn_2015/fits_smeared/150125/sat-k-witb.fits
+        - Saturn_2015/fits_smeared/150125/sat-q-witb.fits
+        - Saturn_2015/fits_smeared/150528/sat-s-ictb.fits
+        - Saturn_2015/fits_smeared/150528/sat-c-ictb.fits
+        - Saturn_2015/fits_smeared/150125/sat-k-ictb.fits
+        - Saturn_2015/fits_smeared/150125/sat-q-ictb.fits
+        - common.py
+        - write_ephemerides.py
+        - detect_planet.py
+        - extract_latlon.py
+        - cylindrical_projection.py
+    strategy:
+      vector:
+        FILE:
+          - sat-s-witb
+          - sat-c-witb
+          - sat-k-witb
+          - sat-q-witb
+        FNODISK:
+          - sat-s-ictb
+          - sat-c-ictb
+          - sat-k-ictb
+          - sat-q-ictb
+        ORIGIN:
+          - ./Saturn_2015/fits_smeared/150528
+          - ./Saturn_2015/fits_smeared/150528
+          - ./Saturn_2015/fits_smeared/150125
+          - ./Saturn_2015/fits_smeared/150125
+        SHIFT:
+          - -30
+          - -10
+          - -5
+          - -5
+        BV:
+          - 100
+          - 100
+          - 80
+          - 80
+    steps:
+      - name: write ephemerides
+        run: ./write_ephemerides.py --dir=$ORIGIN --fits=$FILE --obs=vla --shift=$SHIFT
+      - name: detect planet
+        run: ./detect_planet.py --dir=$ORIGIN --fits=$FILE -v=$BV
+      - name: make a link to masked file
+        run: ln -sf ./$FILE.info ./data/$FNODISK.info
+      - name: extract latitude and longitude
+        run: ./extract_latlon.py --info=$FILE --fits=$ORIGIN/$FNODISK
+      - name: make map of cylindrical projection
+        run: ./cylindrical_projection.py --fits=$FNODISK
+    outputs:
+      - ./data/$FILE.info
+      - ./figs/$FILE-ellipse.png
+      - ./data/$FILE.data
+      - ./figs/$FILE-cylin.png
+  sat-xu-ictb:
+    skip: true
+    needs:
+      files:
+        - Saturn_2015/fits_smeared/150528/sat-x-ictb.fits
+        - Saturn_2015/fits_smeared/150528/sat-u-ictb.fits
+        - common.py
+        - write_ephemerides.py
+        - detect_planet.py
+        - extract_latlon.py
+        - cylindrical_projection.py
+    env:
+      ORIGIN: ./Saturn_2015/fits_smeared/150528
+      PROCESSED: ./saturn_2015_processed/
+      SHIFT: -6
+      BV: 0.9
+    strategy:
+      vector:
+        FILE:
+          - sat-x-ictb
+          #- sat-u-ictb
+    steps:
+      - name: write ephemerides
+        run: ./write_ephemerides.py --dir=$ORIGIN --fits=$FILE --obs=vla --shift=$SHIFT
+      - name: make a link to masked file
+        run: ln -sf ./$FILE.info ./data/$FILE-msk.info
+      - name: detect planet
+        run: ./detect_planet.py --dir=$PROCESSED --fits=$FILE-msk -v=$BV
+      - name: extract latitude and longitude
+        run: ./extract_latlon.py --info=$FILE
+      - name: make map of cylindrical projection
+        run: ./cylindrical_projection.py --fits=$FILE
+    outputs:
+      - ./data/$FILE.info
+      - ./figs/$FILE-ellipse.png
+      - ./data/$FILE.data
+      - ./figs/$FILE-cylin.png
+  plot-vla-images-scxukq:
+    skip: true
+    needs:
+      files:
+        - Saturn_2015/fits_smeared/150528/sat-s-ictb.fits
+        - Saturn_2015/fits_smeared/150528/sat-c-ictb.fits
+        - Saturn_2015/fits_smeared/150528/sat-x-ictb.fits
+        - Saturn_2015/fits_smeared/150528/sat-u-ictb.fits
+        - Saturn_2015/fits_smeared/150125/sat-k-ictb.fits
+        - Saturn_2015/fits_smeared/150125/sat-q-ictb.fits
+        - data/sat-s-ictb.info
+        - data/sat-s-ictb.dat
+        - data/sat-c-ictb.info
+        - data/sat-c-ictb.dat
+        - data/sat-k-ictb.info
+        - data/sat-k-ictb.dat
+        - data/sat-q-ictb.info
+        - data/sat-q-ictb.dat
+    strategy:
+      vector:
+        SCALE: [64,8,8,8,8,8]
+        DV: [50,50,'none','none',8,20]
+        BAND: ['S','C','X','U','K','Q']
+        NAME:
+          - sat-s-ictb
+          - sat-c-ictb
+          - sat-x-ictb
+          - sat-u-ictb
+          - sat-k-ictb
+          - sat-q-ictb
+        FITS:
+          - Saturn_2015/fits_smeared/150528/sat-s-ictb.fits
+          - Saturn_2015/fits_smeared/150528/sat-c-ictb.fits
+          - Saturn_2015/fits_smeared/150528/sat-x-ictb.fits
+          - Saturn_2015/fits_smeared/150528/sat-u-ictb.fits
+          - Saturn_2015/fits_smeared/150125/sat-k-ictb.fits
+          - Saturn_2015/fits_smeared/150125/sat-q-ictb.fits
+    steps:
+      - name: plot vla image for individual band
+        run: ./plot_vla_images.py --info=./data/$NAME.info --band=$BAND
+          --fits=$FITS --data=./data/$NAME.dat --out=$NAME
+          --scale=$SCALE --dv=$DV
+    outputs:
+      - ./figs/sat-s-ictb-full.png
+      - ./figs/sat-c-ictb-full.png
+      - ./figs/sat-x-ictb-full.png
+      - ./figs/sat-u-ictb-full.png
+      - ./figs/sat-k-ictb-full.png
+      - ./figs/sat-q-ictb-full.png
+  stack-vla-images:
+    skip: true
+    needs:
+      files:
+        - ./figs/sat-s-ictb-full.png
+        - ./figs/sat-c-ictb-full.png
+        - ./figs/sat-x-ictb-full.png
+        - ./figs/sat-u-ictb-full.png
+        - ./figs/sat-k-ictb-full.png
+        - ./figs/sat-q-ictb-full.png
+    steps:
+      - name: stack six VLA channels
+        run: convert -gravity center
+            ./figs/sat-s-ictb-full.png 
+            ./figs/sat-c-ictb-full.png
+            ./figs/sat-x-ictb-full.png
+            ./figs/sat-u-ictb-full.png
+            ./figs/sat-k-ictb-full.png
+            ./figs/sat-q-ictb-full.png
+            -append
+            ./figs/sat-full.png
+    outputs:
+      - ./figs/sat-full.png
+  write-vla-data-convolved:
+    skip: true
+    needs:
+      files:
+        - data/sat-s-ictb.dat
+        - data/sat-c-ictb.dat
+        - data/sat-x-ictb.dat
+        - data/sat-u-ictb.dat
+        - data/sat-k-ictb.dat
+        - data/sat-q-ictb.dat
+    steps:
+      - name: write convolved tb data channel by channel
+        run: ./write_saturn_residual.py 
+      - name: write tb data collecting all channels
+        run: ./write_saturn_residual_all.py
+    outputs:
+      - ./data/vla_saturn_s.txt
+      - ./data/vla_saturn_c.txt
+      - ./data/vla_saturn_x.txt
+      - ./data/vla_saturn_u.txt
+      - ./data/vla_saturn_k.txt
+      - ./data/vla_saturn_q.txt
+      - ./data/vla_saturn_scxukq.txt
+  plot-vla-latitude:
+    skip: true
+    needs:
+      files:
+        - ./data/vla_saturn_s.txt
+        - ./data/vla_saturn_c.txt
+        - ./data/vla_saturn_x.txt
+        - ./data/vla_saturn_u.txt
+        - ./data/vla_saturn_k.txt
+        - ./data/vla_saturn_q.txt
+    steps:
+      - name: plot saturn brightness temperature anomaly as a function of latitude
+        run: ./plot_saturn_latitude.py
+    outputs:
+      - ./figs/saturn_tb_latitude.png
+  beam-deconvolution:
+    #skip: true
+    needs:
+      files:
+        - ./data/vla_saturn_s.txt
+        - ./data/vla_saturn_c.txt
+        - ./data/vla_saturn_x.txt
+        - ./data/vla_saturn_u.txt
+        - ./data/vla_saturn_k.txt
+        - ./data/vla_saturn_q.txt
+    strategy:
+      vector:
+        BMAJOR: [6.91E-4,4.6E-4,1.67E-4,1.00E-4,2.32E-4,1.37E-4]
+        BMINOR: [3.68E-4,1.7E-4,7.53E-5,5.13E-5,1.07E-4,5.03E-5]
+        BPA:    [77.7,-69.4,60.8,-82.6,62.9,58.8]
+        BAND:   [s,c,x,u,k,q]
+        DISK:   [0,1,2,4,6,7]
+        L2:     [10,10,10,1,1,1]
+        INFO:
+          - sat-s-witb.info
+          - sat-c-witb.info
+          - sat-x-ictb.info
+          - sat-u-ictb.info
+          - sat-k-witb.info
+          - sat-q-witb.info
+    steps:
+      - name: beam deconvolution
+        run: ./beam_deconvolve_v2.py --band=$BAND
+          --bmajor=$BMAJOR --bminor=$BMINOR --bpa=$BPA
+          --info=$INFO --l2=$L2
+    outputs:
+      - ./figs/saturn_deconv_s.png
+      - ./figs/saturn_deconv_c.png
+      - ./figs/saturn_deconv_x.png
+      - ./figs/saturn_deconv_u.png
+      - ./figs/saturn_deconv_k.png
+      - ./figs/saturn_deconv_q.png
+      - ./data/vla_saturn_s_deconv.txt 
+      - ./data/vla_saturn_c_deconv.txt 
+      - ./data/vla_saturn_x_deconv.txt 
+      - ./data/vla_saturn_u_deconv.txt 
+      - ./data/vla_saturn_k_deconv.txt 
+      - ./data/vla_saturn_q_deconv.txt 
+  write-deconvolution-with-disk:
+    skip: true
+    needs:
+      files:
+        - ./data/vla_saturn_s_deconv.txt 
+        - ./data/vla_saturn_c_deconv.txt 
+        - ./data/vla_saturn_x_deconv.txt 
+        - ./data/vla_saturn_u_deconv.txt 
+        - ./data/vla_saturn_k_deconv.txt 
+        - ./data/vla_saturn_q_deconv.txt 
+        - limb_disk.txt
+    steps:
+      - name: write deconvolution with disk
+        run: ./write_saturn_nh_all_deconv.py
+    outputs:
+      - ./data/vla_saturn_csxukq_deconv.txt
