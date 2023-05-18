@@ -1,0 +1,16 @@
+## Mar 25, 2022, VLA processing
+1. open GIMP
+2. open sat-u-ictb
+3. create a new layer (lower right corner)
+  - layer name : back plane
+  - fill with : Transparency
+4. ellipse selection tool
+  - highlight transparency : 50%
+5. edit : fill with foreground color
+6. save to fits file (foreground color is 1, background color is 0)
+
+# alternative
+3. ellipse selection tool
+4. fill with white color (top left tool icon)
+5. select -> invert
+6. fill with back color (background color)

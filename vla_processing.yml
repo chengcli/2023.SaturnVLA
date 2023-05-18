@@ -147,7 +147,7 @@ jobs:
       - ./figs/sat-k-ictb-full.png
       - ./figs/sat-q-ictb-full.png
   stack-vla-images:
-    skip: true
+    #skip: true
     needs:
       files:
         - ./figs/sat-s-ictb-full.png
@@ -208,7 +208,7 @@ jobs:
     outputs:
       - ./figs/saturn_tb_latitude.png
   beam-deconvolution:
-    #skip: true
+    skip: true
     needs:
       files:
         - ./data/vla_saturn_s.txt
