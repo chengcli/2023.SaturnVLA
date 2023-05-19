@@ -34,6 +34,15 @@ parser.add_argument('--scale',
     default = '8',
     help = 'pixel scale'
     )
+parser.add_argument('--bmajor',
+    help = 'beam major in degrees'
+    )
+parser.add_argument('--bminor',
+    help = 'beam minor in degrees'
+    )
+parser.add_argument('--bpa',
+    help = 'beam polar angle in degrees'
+    )
 args = vars(parser.parse_args())
 
 def deg2rad(ang):
@@ -92,6 +101,16 @@ x2 = min(max(0, x2), nx - 1)
 y1 = min(max(0, y1), ny - 1)
 y2 = min(max(0, y2), ny - 1)
 
+dist = float(info['dist'])
+#bmajor  = deg2rad(4.6E-4) # major in degrees
+bmajor  = deg2rad(float(args['bmajor']))
+#bminor  = deg2rad(1.7E-4) # minor in degrees
+bminor  = deg2rad(float(args['bminor']))
+#bpa     = deg2rad(-69.4)  # position angle to north
+bpa     = deg2rad(float(args['bpa']))
+#dist   = 8.8*1.5E8       # range to saturn in km
+print(pix)
+
 #fig, axs = subplots(1, 3, figsize = (20, 4),
 #  gridspec_kw={'width_ratios':[1,3,1]})
 
@@ -107,12 +126,22 @@ ax.pcolormesh(data[x1:x2,y1:y2], cmap = 'Greys_r')
 ellipse = Ellipse((ycenter - y1, xcenter - x1), width = re*2, height = rp*2, angle = phi,
   fill = False, color = 'C1', ls = '-', lw = 2)
 ax.add_patch(ellipse)
+
+# beam pattern
+#print(dist*tan(bminor)/pix, dist*tan(bmajor)/pix, bpa)
+#print(re, rp)
+ellipse2 = Ellipse((ycenter - y1 - re*1.4, xcenter - x1 - rp*1.8),
+                   width = 2*dist*tan(bmajor)/pix,
+                   height = 2*dist*tan(bminor)/pix, angle = bpa,
+                   fill = True, color = 'C1', ls = '-', lw = 2)
+ax.add_patch(ellipse2)
 ax.set_aspect('equal')
 ax.axis('off')
 
 # cylindrical projection
 #ax = axs[1]
 ax = fig.add_subplot(gs[0,1])
+ax.tick_params(axis='both', which='major', labelsize=15)
 data = genfromtxt(args['data'])
 lat = data[:,1]
 lon = data[:,3]
@@ -151,6 +180,7 @@ ax.set_xlim([360., 0.])
 
 # add colorbar
 ax = fig.add_subplot(gs[1,1])
+ax.tick_params(axis='both', which='major', labelsize=15)
 colorbar(h1, cax = ax, orientation = 'horizontal')#, label = "%s band Tb' (K)" % args['band'])
 ax.grid('on')
 
@@ -165,6 +195,7 @@ if args['dv'] != 'none':
 else:
   vmin = tb[ix].min()
 ax = fig.add_subplot(gs[0,2], projection = 'polar')
+ax.tick_params(axis='both', which='major', labelsize=15)
 h2 = ax.scatter(lon[iy]/180.*pi, colat[iy], c = tb[iy],
   s = sa[iy], cmap = 'Greys_r', vmin = vmin, vmax = vmax)
 ax.set_ylim([0., 40.])
@@ -176,6 +207,7 @@ ax.set_facecolor('k')
 #divider = make_axes_locatable(ax)
 # color bar
 ax = fig.add_subplot(gs[1,2])
+ax.tick_params(axis='both', which='major', labelsize=15)
 colorbar(h2, cax = ax, orientation = 'horizontal')#, label = "Tb' (K)")
 ax.grid('on')
 
