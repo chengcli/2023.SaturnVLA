@@ -11,5 +11,5 @@ def plot_vapor_profile(ax, ncdata, name, color = 'C0'):
 def plot_temp_profile(ax, ncdata, color = 'k'):
   temp = ncdata['temp'][0,:,0,0]
   pres = ncdata['press'][0,:,0,0]/1.E5  # pa -> bar
-  ax.plot(temp, pres, linewidth = 2, color = color)
+  ax.plot(temp, pres, linewidth = 2, color = color, alpha = 0.5)
   ax.set_yscale('log')
