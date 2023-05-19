@@ -136,6 +136,7 @@ sig_conv = ifft(fft(sig_avg, npad*num_grids) \
 #fig, axs = subplots(2, 1, figsize = (12,8))
 figure(1, figsize = (16,3))
 ax = axes()
+ax.tick_params(axis='both', which='major', labelsize=15)
 
 # observation
 #ax.step(ydis, tb, 'C0')

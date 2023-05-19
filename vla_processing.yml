@@ -98,7 +98,7 @@ jobs:
       - ./data/$FILE.data
       - ./figs/$FILE-cylin.png
   plot-vla-images-scxukq:
-    #skip: true
+    skip: true
     needs:
       files:
         - Saturn_2015/fits_smeared/150528/sat-s-ictb.fits
@@ -151,7 +151,7 @@ jobs:
       - ./figs/sat-k-ictb-full.png
       - ./figs/sat-q-ictb-full.png
   stack-vla-images:
-    #skip: true
+    skip: true
     needs:
       files:
         - ./figs/sat-s-ictb-full.png
@@ -254,6 +254,27 @@ jobs:
       - ./data/vla_saturn_u_deconv.txt 
       - ./data/vla_saturn_k_deconv.txt 
       - ./data/vla_saturn_q_deconv.txt 
+  stack-deconvolved-images:
+    #skip: true
+    needs:
+      files:
+        - ./figs/saturn_deconv_s_v2.png
+        - ./figs/saturn_deconv_c_v2.png
+        - ./figs/saturn_deconv_x_v2.png
+        - ./figs/saturn_deconv_u_v2.png
+        - ./figs/saturn_deconv_k_v2.png
+        - ./figs/saturn_deconv_q_v2.png
+    steps:
+      - name: stack six VLA channels
+        run: convert -gravity center
+            ./figs/saturn_deconv_q_v2.png
+            ./figs/saturn_deconv_k_v2.png
+            ./figs/saturn_deconv_u_v2.png
+            ./figs/saturn_deconv_x_v2.png
+            ./figs/saturn_deconv_c_v2.png
+            ./figs/saturn_deconv_s_v2.png
+            -append
+            ./figs/saturn_vla_deconv_v3.png
   write-deconvolution-with-disk:
     skip: true
     needs:
