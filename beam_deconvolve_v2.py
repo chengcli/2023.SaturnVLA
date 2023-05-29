@@ -148,10 +148,12 @@ ax.fill_between(ylat, ytb - ystb - tmid, ytb + ystb - tmid,
 
 # de-convolved result with error
 ax.errorbar(ylat, sig_avg[:num_grids] - tmid,
-  yerr = sig_std[:num_grids], color = 'C3', capsize = 5, label = 'obs-deconv')
+  yerr = sig_std[:num_grids], color = 'C1', capsize = 5,
+            label = 'obs-deconv', linewidth = 2)
 
 # re-convolved observations
-ax.plot(ylat, sig_conv[:num_grids] - tmid, '-', color = 'C2', label = 'obs-reconv')
+ax.plot(ylat, sig_conv[:num_grids] - tmid, '-', color = 'C2',
+        label = 'obs-reconv', linewidth = 2)
 
 
 #ax.plot(ygrid, result, marker = '+', color = 'C3', ms = 15, linewidth = 2)
@@ -162,20 +164,20 @@ ax.set_xlim([0., 90.])
 # annotations
 ax.plot([0., 90.], [0., 0.], 'k--', alpha = 0.5)
 if args['band'] == 's':
-  ax.plot([0., sbeam/5.8E4/pi*180.], [-10, -10], linewidth = 10, color = 'C1')
+  ax.plot([0., sbeam/5.8E4/pi*180.], [-10, -10], linewidth = 10, color = 'C3')
   ax.set_ylim([-12., 14.])
 elif args['band'] == 'c':
-  ax.plot([0., sbeam/5.8E4/pi*180.], [-13, -13], linewidth = 10, color = 'C1')
+  ax.plot([0., sbeam/5.8E4/pi*180.], [-13, -13], linewidth = 10, color = 'C3')
   ax.set_ylim([-15., 15.])
 elif args['band'] == 'x' or args['band'] == 'u':
-  ax.plot([0., sbeam/5.8E4/pi*180.], [-8, -8], linewidth = 10, color = 'C1')
+  ax.plot([0., sbeam/5.8E4/pi*180.], [-8, -8], linewidth = 10, color = 'C3')
   ax.set_ylim([-10., 16.])
 elif args['band'] == 'k':
-  ax.plot([0., sbeam/5.8E4/pi*180.], [-2, -2], linewidth = 10, color = 'C1')
+  ax.plot([0., sbeam/5.8E4/pi*180.], [-2, -2], linewidth = 10, color = 'C3')
   ax.set_ylim([-3., 5.])
 elif args['band'] == 'q':
-  ax.plot([0., sbeam/5.8E4/pi*180.], [-4, -4], linewidth = 10, color = 'C1')
+  ax.plot([0., sbeam/5.8E4/pi*180.], [-4, -4], linewidth = 10, color = 'C3')
   ax.set_ylim([-6., 7.])
 
 #show()
-savefig('figs/saturn_deconv_%s_v2.png' % args['band'], bbox_inches = 'tight')
+savefig('figs/saturn_deconv_%s_v2.png' % args['band'], bbox_inches = 'tight', dpi = 400)

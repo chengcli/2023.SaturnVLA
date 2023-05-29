@@ -4,7 +4,10 @@ from matplotlib.gridspec import GridSpec
 from pylab import *
 from netCDF4 import Dataset
 from snapy.planet_gravity import graphic2centric, centric2graphic
+import matplotlib.pyplot as plt
 import os
+
+#plt.style.use('dark_background')
 
 # saturn zonal wind
 data = genfromtxt('u_vs_lat.saturn.Voyager.III', skip_header = 7)
@@ -78,4 +81,5 @@ ax2.set_ylabel('zonal wind (m/s)', fontsize = 15)
 
 #show()
 savefig('figs/ammonia_map2d_v7.png', bbox_inches = 'tight', dpi = 400)
+#savefig('figs/ammonia_map2d_v7_dark.png', bbox_inches = 'tight', dpi = 400)
 
