@@ -49,4 +49,4 @@ for i in range(nbands):
     ax.set_xlabel('Planetographic Latitude (degree)', fontsize = 14)
   ax.legend(loc = 4, frameon = False)
 
-savefig('./figs/saturn_tb_latitude_v2.png', bbox_inches = 'tight')
+savefig('./figs/saturn_tb_latitude_v2.png', bbox_inches = 'tight', dpi = 400)

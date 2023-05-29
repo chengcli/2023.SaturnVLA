@@ -31,4 +31,4 @@ ax.set_xlabel('Vapor mixing ratio (g/kg)', fontsize = 14)
 ax.set_ylabel('Pressure (bar)', fontsize = 14)
 
 #show()
-savefig('figs/data_contribution_atm_v2.png', bbox_inches = 'tight')
+savefig('figs/data_contribution_atm_v2.png', bbox_inches = 'tight', dpi = 400)
