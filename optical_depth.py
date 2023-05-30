@@ -37,8 +37,8 @@ def plot_optical_depth(ax, case, ang = None):
   ax.set_ylim([50., 0.5])
   ax.set_xlim([0, 10.])
   ax.set_yscale('log')
-  ax.set_xlabel('optical depth', fontsize = 12)
-  ax.set_ylabel('Pressure (bar)', fontsize = 12)
+  ax.set_xlabel('Optical Depth', fontsize = 14)
+  ax.set_ylabel('Pressure (bar)', fontsize = 14)
 
 if __name__ == '__main__':
   case = 'build/saturn_vla_inversion_wfunc'
@@ -46,5 +46,6 @@ if __name__ == '__main__':
   figure(1, figsize = (8, 8))
   ax = axes()
   plot_optical_depth(ax, case, 48.2)
+  ax.tick_params(axis='both', which='major', labelsize=14)
   #show()
-  savefig('figs/optical_depth.png', bbox_inches = 'tight')
+  savefig('figs/optical_depth.png', bbox_inches = 'tight', dpi = 400)

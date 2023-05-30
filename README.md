@@ -26,6 +26,11 @@
 ./vla_processing.sh
 ```
 
+- Figure 5
+```
+./plot_ammonia2d.py
+```
+
 - Figure S7:
 ```
 ./plot_fit_quality.py
